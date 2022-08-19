@@ -16,7 +16,11 @@ function App() {
 
   return (
     <main className="App">
-      <SearchBar />
+      <SearchBar
+        location={location}
+        setLocation={setLocation}
+        setErrMsg={setErrMsg}
+      />
       <CurrentForecast />
       <NavButtons />
       <DailyForecast />
