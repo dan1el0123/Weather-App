@@ -59,7 +59,8 @@ function App() {
         handleReload={handleReload}
         handleUnitChange={handleUnitChange}
       />
-      <DailyForecast />
+      <hr />
+      {weather && <DailyForecast daily={weather.daily.slice(1, 7)} />}
     </main>
   );
 }
