@@ -9,6 +9,7 @@ import {
 import "./NavButtons.css";
 
 const NavButtons = ({
+  handleGeoLocation,
   handleHomeLocation,
   handleSaveLocation,
   handleReload,
@@ -19,7 +20,7 @@ const NavButtons = ({
       <Button
         title="Get Location"
         label="Get the current weather conditions for your current location"
-        handleClick={() => {}}
+        handleClick={handleGeoLocation}
       >
         <FaMapMarkerAlt />
       </Button>

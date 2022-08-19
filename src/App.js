@@ -18,9 +18,38 @@ function App() {
   const [reload, setReload] = useState(0);
 
   useEffect(() => {
+    const geoLocation = () => {
+      if (!navigator.geolocation) {
+        return;
+      } else {
+        setErrMsg("Locating...");
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setErrMsg("");
+            setLocation((prev) => {
+              return {
+                ...prev,
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+                name: `Lat:${position.coords.latitude
+                  .toString()
+                  .slice(0, 10)} • Lon:${position.coords.longitude
+                  .toString()
+                  .slice(0, 10)}`,
+              };
+            });
+          },
+          () => {
+            setErrMsg("Unable to retrieve your location");
+          }
+        );
+      }
+    };
     const home = getHomeLocation();
     if (home) {
       setLocation(home);
+    } else {
+      geoLocation();
     }
   }, []);
 
@@ -38,6 +67,34 @@ function App() {
     getWeather();
   }, [location, reload]);
 
+  const handleGeoLocation = (event) => {
+    if (event && event.type === "click" && !navigator.geolocation) {
+      setErrMsg("Geolocation not supported");
+    } else if (!navigator.geolocation) {
+      return;
+    } else {
+      setErrMsg("Locating...");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setErrMsg("");
+          setLocation({
+            ...location,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+            name: `Lat:${position.coords.latitude
+              .toString()
+              .slice(0, 10)} • Lon:${position.coords.longitude
+              .toString()
+              .slice(0, 10)}`,
+          });
+        },
+        () => {
+          setErrMsg("Unable to retrieve your location");
+        }
+      );
+    }
+  };
+
   const handleHomeLocation = () => {
     const home = getHomeLocation();
     if (home) {
@@ -51,6 +108,7 @@ function App() {
 
   const handleSaveLocation = () => {
     localStorage.setItem("homeLocation", JSON.stringify(location));
+    setErrMsg("Saved home location");
   };
 
   const handleReload = () => {
@@ -79,6 +137,7 @@ function App() {
         />
       )}
       <NavButtons
+        handleGeoLocation={handleGeoLocation}
         handleHomeLocation={handleHomeLocation}
         handleReload={handleReload}
         handleUnitChange={handleUnitChange}
