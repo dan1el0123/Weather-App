@@ -3,6 +3,7 @@ import CurrentForecast from "./components/CurrentForecast";
 import DailyForecast from "./components/DailyForecast";
 import NavButtons from "./components/NavButtons";
 import SearchBar from "./components/SearchBar";
+import { getWeatherFromCoords } from "./api";
 
 function App() {
   const [location, setLocation] = useState({
@@ -14,6 +15,20 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [errMsg, setErrMsg] = useState("");
 
+  useEffect(() => {
+    const getWeather = async () => {
+      try {
+        const weatherData = await getWeatherFromCoords(location);
+        setWeather(weatherData);
+        setErrMsg("");
+      } catch (err) {
+        setErrMsg(err.message);
+      }
+    };
+
+    getWeather();
+  }, [location]);
+
   return (
     <main className="App">
       <SearchBar
@@ -21,7 +36,14 @@ function App() {
         setLocation={setLocation}
         setErrMsg={setErrMsg}
       />
-      <CurrentForecast />
+      {weather && (
+        <CurrentForecast
+          errMsg={errMsg}
+          weather={weather}
+          unit={location.unit}
+          name={location.name}
+        />
+      )}
       <NavButtons />
       <DailyForecast />
     </main>
