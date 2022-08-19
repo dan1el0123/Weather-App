@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import CurrentForecast from "./components/CurrentForecast";
+import DailyForecast from "./components/DailyForecast";
+import NavButtons from "./components/NavButtons";
+import SearchBar from "./components/SearchBar";
 
 function App() {
+  const [location, setLocation] = useState({
+    lat: "42",
+    lon: "21.4333",
+    name: "Skopje, MK",
+    unit: "metric",
+  });
+  const [weather, setWeather] = useState(null);
+  const [errMsg, setErrMsg] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <SearchBar />
+      <CurrentForecast />
+      <NavButtons />
+      <DailyForecast />
+    </main>
   );
 }
 
