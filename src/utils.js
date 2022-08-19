@@ -3,3 +3,11 @@ export const getDayAbbreviation = (data) => {
   const utcString = dateObj.toUTCString();
   return utcString.slice(0, 3).toUpperCase();
 };
+
+export const getHomeLocation = () => {
+  if (localStorage.getItem("homeLocation")) {
+    return JSON.parse(localStorage.getItem("homeLocation"));
+  } else {
+    return null;
+  }
+};

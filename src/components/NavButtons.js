@@ -8,7 +8,12 @@ import {
 } from "react-icons/fa";
 import "./NavButtons.css";
 
-const NavButtons = ({ handleSaveLocation, handleReload, handleUnitChange }) => {
+const NavButtons = ({
+  handleHomeLocation,
+  handleSaveLocation,
+  handleReload,
+  handleUnitChange,
+}) => {
   return (
     <nav className="navButtons fade-in">
       <Button
@@ -21,7 +26,7 @@ const NavButtons = ({ handleSaveLocation, handleReload, handleUnitChange }) => {
       <Button
         title="Home weather"
         label="Get the current weather conditions for your home location"
-        handleClick={() => {}}
+        handleClick={handleHomeLocation}
       >
         <FaHome />
       </Button>

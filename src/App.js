@@ -4,6 +4,7 @@ import DailyForecast from "./components/DailyForecast";
 import NavButtons from "./components/NavButtons";
 import SearchBar from "./components/SearchBar";
 import { getWeatherFromCoords } from "./api";
+import { getHomeLocation } from "./utils";
 
 function App() {
   const [location, setLocation] = useState({
@@ -15,6 +16,13 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [errMsg, setErrMsg] = useState("");
   const [reload, setReload] = useState(0);
+
+  useEffect(() => {
+    const home = getHomeLocation();
+    if (home) {
+      setLocation(home);
+    }
+  }, []);
 
   useEffect(() => {
     const getWeather = async () => {
@@ -29,6 +37,17 @@ function App() {
 
     getWeather();
   }, [location, reload]);
+
+  const handleHomeLocation = () => {
+    const home = getHomeLocation();
+    if (home) {
+      setLocation(home);
+      setErrMsg("");
+      setReload((prev) => prev + 1);
+    } else {
+      setErrMsg("No home location");
+    }
+  };
 
   const handleSaveLocation = () => {
     localStorage.setItem("homeLocation", JSON.stringify(location));
@@ -60,6 +79,7 @@ function App() {
         />
       )}
       <NavButtons
+        handleHomeLocation={handleHomeLocation}
         handleReload={handleReload}
         handleUnitChange={handleUnitChange}
         handleSaveLocation={handleSaveLocation}
