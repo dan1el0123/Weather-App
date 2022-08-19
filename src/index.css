@@ -59,6 +59,8 @@ hr {
   border-radius: 10px;
   box-shadow: 0px 0px 15px gray;
   background-color: #212121;
+  background-size: cover;
+  background-blend-mode: overlay;
 }
 
 .fade-in {
@@ -77,4 +79,29 @@ hr {
   100% {
     opacity: 1;
   }
+}
+
+.rain {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url("../public/img/rain.jpg");
+}
+
+.snow {
+  background-color: rgba(0, 0, 0, 0.7);
+  background-image: url("../public/img/snow.jpg");
+}
+
+.night {
+  background-color: rgba(204, 0, 102, 0.5);
+  background-image: url("../public/img/night.jpg");
+}
+
+.fog {
+  background-color: darkslategray;
+  background-image: url("../public/img/fog.jpg");
+}
+
+.clouds {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url("../public/img/clouds.jpg");
 }

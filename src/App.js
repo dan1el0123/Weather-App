@@ -4,7 +4,7 @@ import DailyForecast from "./components/DailyForecast";
 import NavButtons from "./components/NavButtons";
 import SearchBar from "./components/SearchBar";
 import { getWeatherFromCoords } from "./api";
-import { getHomeLocation } from "./utils";
+import { getHomeLocation, getWeatherClass } from "./utils";
 
 function App() {
   const [location, setLocation] = useState({
@@ -121,7 +121,13 @@ function App() {
   };
 
   return (
-    <main className="App">
+    <main
+      className={
+        weather
+          ? `App ${getWeatherClass(weather.current.weather[0].icon)}`
+          : "App"
+      }
+    >
       <SearchBar
         location={location}
         setLocation={setLocation}
