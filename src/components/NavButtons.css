@@ -1,0 +1,36 @@
+.navButtons {
+  width: calc(100% - 10px);
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+}
+
+.button {
+  min-width: 48px;
+  min-height: 48px;
+  outline: none;
+  font-size: 1.5rem;
+  font-weight: 900;
+  border-radius: 80px;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid lightgray;
+}
+@media screen and (min-width: 800px) {
+  .button {
+    min-width: 64px;
+    min-height: 64px;
+  }
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+  box-shadow: 4px 2px 5px #000;
+  border-color: #fff;
+}

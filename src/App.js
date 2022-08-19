@@ -14,6 +14,7 @@ function App() {
   });
   const [weather, setWeather] = useState(null);
   const [errMsg, setErrMsg] = useState("");
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     const getWeather = async () => {
@@ -27,7 +28,16 @@ function App() {
     };
 
     getWeather();
-  }, [location]);
+  }, [location, reload]);
+
+  const handleReload = () => {
+    setReload((prev) => prev + 1);
+  };
+
+  const handleUnitChange = () => {
+    const newUnit = location.unit === "metric" ? "imperial" : "metric";
+    setLocation({ ...location, unit: newUnit });
+  };
 
   return (
     <main className="App">
@@ -38,13 +48,17 @@ function App() {
       />
       {weather && (
         <CurrentForecast
+          key={reload}
           errMsg={errMsg}
           weather={weather}
           unit={location.unit}
           name={location.name}
         />
       )}
-      <NavButtons />
+      <NavButtons
+        handleReload={handleReload}
+        handleUnitChange={handleUnitChange}
+      />
       <DailyForecast />
     </main>
   );
