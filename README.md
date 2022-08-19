@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+# Preview
+
+<div align="center">
+    <b><a href="https://regal-mousse-5760c6.netlify.app/" target="_blank">
+    <img src="./preview.png" />
+    </a></b>
+</div>
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
