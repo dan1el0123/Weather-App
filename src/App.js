@@ -30,6 +30,10 @@ function App() {
     getWeather();
   }, [location, reload]);
 
+  const handleSaveLocation = () => {
+    localStorage.setItem("homeLocation", JSON.stringify(location));
+  };
+
   const handleReload = () => {
     setReload((prev) => prev + 1);
   };
@@ -58,6 +62,7 @@ function App() {
       <NavButtons
         handleReload={handleReload}
         handleUnitChange={handleUnitChange}
+        handleSaveLocation={handleSaveLocation}
       />
       <hr />
       {weather && <DailyForecast daily={weather.daily.slice(1, 7)} />}
